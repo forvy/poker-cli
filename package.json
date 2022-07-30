@@ -1,0 +1,33 @@
+{
+  "name": "poker-cli",
+  "version": "1.0.0",
+  "description": "Poker Card Game",
+  "main": "./dist/parser.js",
+  "bin": {
+    "poker-cli": "./dist/cli.js"
+  },
+  "scripts": {
+    "start": "ts-node ./src/cli.ts compare \"TS JS QS KS AS\" \"5D 4D 3D 2D AD\"",
+    "start:docker": "docker run poker-cli compare \"TS JS QS KS AS\" \"5D 4D 3D 2D AD\"",
+    "test": "mocha -r ts-node/register ./tests/**/*.test.ts",
+    "build": "tsc",
+    "build:docker": "tsc && docker build -t poker-cli .",
+    "clean": "rm -r ./dist",
+    "clean:docker": "docker container rm $(docker container ls -a -q -f ancestor=poker-cli) && docker image rm poker-cli",
+    "clean:npm": "rm -r ./node_modules ./package-lock.json && npm install"
+  },
+  "author": "Theodore (https://github.com/forvy)",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.19.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.13.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.0",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.4.2"
+  }
+}
